@@ -1,31 +1,48 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext  } from "react"
 import { api } from "../service/api"
-
+import { ClientContext } from "./ContextProject"
 
 export const InternalContext = createContext({})
 export function ProjectProviderInternal({children}){
+    const { logout } = useContext(ClientContext)
 
     const [ modalUpdateOpen, setModalUpdateOpen ] = useState(false)
     const [ modalAddContactOpen, setModalAddContactOpen ] = useState(false)
     const [ modalOtherClientsOpen, setModalOtherClientsOpen ] = useState(false)
 
     async function updateClient(formData, id){
-        console.log("entrou na função")
+        const token = localStorage.getItem("@clientToken")
         try {
-            //PRECISA SER COLOCADO A LEITURA DO TOKEN
-            await api.patch(`/clients/${id}`, formData)
+            await api.patch(`/clients/${id}`, formData, {
+                headers:{
+                  Authorization:` Bearer ${token}`
+                }
+            })
             setModalUpdateOpen(false)
             // mostra que deu certo
-            console.log("deu certo")
         } catch (error) {
             console.log("não rolou o update")
+        }
+    }
+    async function deleteClientAPI(id){
+        const token = localStorage.getItem("@clientToken")
+        try{
+            console.log(id)
+            await api.delete(`/clients/${id}`, {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            logout()
+        } catch(erro){
+            console.log(erro)
         }
     }
 
     return(
         <InternalContext.Provider 
             value={{ modalUpdateOpen, setModalUpdateOpen, modalAddContactOpen, setModalAddContactOpen,
-            modalOtherClientsOpen, setModalOtherClientsOpen, updateClient }}>
+            modalOtherClientsOpen, setModalOtherClientsOpen, updateClient, deleteClientAPI }}>
                 {children}
         </InternalContext.Provider>
     )

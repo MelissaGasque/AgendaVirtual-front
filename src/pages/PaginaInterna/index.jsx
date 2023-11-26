@@ -6,24 +6,11 @@ import { AdicionarContato, UpdateContato, ModalOtherClients } from "../../compon
 
 export function InternalPage(){
 
-    const { logout, clientToken, setClientToken } = useContext(ClientContext)
+    const { logout, clientUser } = useContext(ClientContext)
     const { setModalAddContactOpen, setModalUpdateOpen, setModalOtherClientsOpen } = useContext(InternalContext)
 
-    useEffect(() => {
-        const loggedInUser = localStorage.getItem("@client");
-        // console.log(loggedInUser)
-        function teste(){
-            if (loggedInUser) {
-                const foundUser = JSON.parse(loggedInUser);
-                setClientToken(foundUser);
-              }
-        }
-        teste()
-      }, []);
-
-
-    const clientUsername = clientToken.username
-    const clientAdmin = clientToken.admin
+    const clientUsername = clientUser.username
+    const clientAdmin = clientUser.admin
 
     function logOut(){
         logout()

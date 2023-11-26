@@ -1,11 +1,12 @@
 import { useContext } from "react"
-import { ClientContext, InternalContext } from "../../../providers/index.providers"
+import {  InternalContext } from "../../../providers/index.providers"
 import { Button, Input } from "../../index.components"
 import { useForm } from "react-hook-form"
 
+
 export function UpdateContato(){
-    const { clientToken } = useContext(ClientContext)
-    const { modalUpdateOpen, setModalUpdateOpen, updateClient } = useContext(InternalContext)
+    const { modalUpdateOpen, setModalUpdateOpen, updateClient,  deleteClientAPI } = useContext(InternalContext)
+
 
     const { register, handleSubmit, reset } = useForm()
     
@@ -18,9 +19,16 @@ export function UpdateContato(){
     }
 
     function submit(formData){
-        const clientId = clientToken.clientId
-        updateClient(formData, clientId)
-        // reset()
+        const dadosParaEnviar = Object.fromEntries(
+            Object.entries(formData).filter(([_, value]) => value !== "")
+          );
+        const clientId = localStorage.getItem("@clientID")
+        updateClient(dadosParaEnviar, clientId)
+        reset()
+    }
+    function deleteClient(){
+        const clientId = localStorage.getItem("@clientID")
+        deleteClientAPI(clientId)
     }
 
     return(
@@ -35,20 +43,10 @@ export function UpdateContato(){
                     placeholder="Alterar nome"
                     {...register("full_name")}
                 />
-                {/* <Input
-                    type="text"
-                    placeholder="Alterar usuário"
-                    {...register("username")}
-                />
                 <Input
                     type="email"
                     placeholder="Alterar email"
                     {...register("email")}
-                />
-                <Input
-                    type="password"
-                    placeholder="Alterar Senha"
-                    {...register("password")}
                 />
                 <Input
                     type="text"
@@ -56,24 +54,8 @@ export function UpdateContato(){
                     {...register("phone_number")}
                 />
                 <div>
-                    <p>É administrador geral?</p>
-                    <label>Sim</label>
-                    <input
-                        type="radio"
-                        value="true"
-                        name="admin"
-                        {...register("admin")}
-                    />
-                    <label>Não</label>
-                    <input
-                    type="radio"
-                    value="false"
-                    name= "admin" 
-                    {...register("admin")}
-                />
-                </div> */}
-                <div>
                     <Button type="submit">Atualizar</Button>
+                    <Button onClick={deleteClient}> Deletar conta </Button>
                 </div>
             </form>
         </>

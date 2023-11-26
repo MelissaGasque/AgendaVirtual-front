@@ -1,13 +1,29 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react"
 import { api } from "../service/api"
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 
 export const ClientContext = createContext({})
 export function ProjectProvider({children}){
+
     const navigate = useNavigate()
 
     const [ modalIsOpen, setIsOpen ] = useState(false)
     const [ clientToken, setClientToken ] = useState(null)
+    const [ clientUser, setClientUser ] = useState(null)
+
+        // useEffect(() => {
+        //     async function validateToken(){
+        //         const usuarioLogado = localStorage.getItem("@clientToken")
+        //         if(usuarioLogado){
+        //             const data = await api.post("/login", {usuarioLogado})
+        //             if(data.user){
+        //                 setClientUser(data.user)
+        //             } 
+        //         }
+                
+        //     }
+        //     validateToken();
+        // }, []);
 
     async function registrationAPI(formData){
         try{
@@ -22,11 +38,17 @@ export function ProjectProvider({children}){
     async function login(formData){
         try{
             const response = await api.post("/login", formData)
-            const token = response.data.token
-            localStorage.setItem("@clientToken", token.token)
-            localStorage.setItem("@clientID", token.clientId)
-            localStorage.setItem("@client", JSON.stringify(token))
+
+            const token = response.data.token.token
+            const clientId = response.data.token.user.id
+            const clientUser = response.data.token.user
+
+            localStorage.setItem("@clientToken", token)
+            localStorage.setItem("@clientID", clientId)
+
             setClientToken(token)
+            setClientUser(clientUser)
+            
             navigate("/internalPage")
         } 
         catch(error){ 
@@ -38,11 +60,13 @@ export function ProjectProvider({children}){
         localStorage.removeItem("@clienToken")
         localStorage.removeItem("@clientID")
         setClientToken(null)
+        setClientUser(null)
         navigate("/")
     }
 
+
     return(
-        <ClientContext.Provider value={{ login, logout, registrationAPI, modalIsOpen, setIsOpen, clientToken, setClientToken }}>
+        <ClientContext.Provider value={{ login, logout, registrationAPI, modalIsOpen, setIsOpen, clientToken, setClientToken,  clientUser, setClientUser }}>
             {children}
         </ClientContext.Provider>
     )
