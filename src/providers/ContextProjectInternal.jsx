@@ -1,4 +1,4 @@
-import { createContext, useState, useContext  } from "react"
+import { createContext, useState, useContext, useEffect  } from "react"
 import { api } from "../service/api"
 import { ClientContext } from "./ContextProject"
 
@@ -19,6 +19,7 @@ export function ProjectProviderInternal({children}){
                 }
             })
             setModalUpdateOpen(false)
+            setModalOtherClientsOpen(true)
             // mostra que deu certo
         } catch (error) {
             console.log("não rolou o update")

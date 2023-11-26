@@ -26,6 +26,7 @@ export function UpdateContato(){
         updateClient(dadosParaEnviar, clientId)
         reset()
     }
+    
     function deleteClient(){
         const clientId = localStorage.getItem("@clientID")
         deleteClientAPI(clientId)
