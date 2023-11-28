@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react"
+import { createContext, useState } from "react"
 import { api } from "../service/api"
 import { useNavigate } from "react-router-dom"
 
@@ -26,36 +26,9 @@ export function ProjectProvider({children}){
         //     validateToken();
         // }, []);
 
-        // useEffect(() => {
-        //     async function generateList(){
-        //         const token = localStorage.getItem("@clientToken")
-        //         try {
-        //             const clientsList = await api.get("/clients", {
-        //                 headers:{
-        //                   Authorization:` Bearer ${token}`
-        //                 }})
-        //                 console.log("deu tudo certo")
-        //             setListClients(clientsList)
-        //                 console.log("adicionei no estado")
-        //         }catch(error){
-        //             console.log(error)
-        //         }
-        //     }
-        //     // async function checkdminStatus(){
-        //     //     const clientAdmin = response.data.token.user.admin
-        //     //     console.log(clientAdmin)
-        //     //     if(clientAdmin){
-        //     //         generateList()
-        //     //     }
-        //     // }
-        //     // checkdminStatus()
-        //     generateList()
-        // }, [])
-
     async function registrationAPI(formData){
         try{
             await api.post("/clients", formData)
-            // setListClients((listClients) => [...listClients], formData)
             setIsOpen(false)
         }catch (error){
             // toast.error("Ops! Algo deu errado")
@@ -92,14 +65,6 @@ export function ProjectProvider({children}){
         navigate("/")
     }
 
-    // async function generateList(){
-    //     try {
-    //         const clientsList = await api.get("/clients")
-    //         setListClients(clientsList)
-    //     }catch(error){
-    //         console.log(error)
-    //     }
-    // }
 
     return(
         <ClientContext.Provider value={{ login, logout, registrationAPI, modalIsOpen, setIsOpen, clientToken, setClientToken,  clientUser, setClientUser }}>

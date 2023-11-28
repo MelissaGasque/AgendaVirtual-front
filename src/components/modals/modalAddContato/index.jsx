@@ -5,20 +5,22 @@ import { useForm } from "react-hook-form"
 
 
 export function AdicionarContato(){
-    const { modalAddContactOpen, setModalAddContactOpen } = useContext(InternalContext)
+    const { modalAddContactOpen, setModalAddContactOpen, createContact } = useContext(InternalContext)
 
     const { register, handleSubmit, reset } = useForm()
     
+    function submit(formData){
+        createContact(formData)
+        // console.log(formData)
+        reset()
+    }
+
     function closeModal(){
         setModalAddContactOpen(false)
     }
 
     if(!modalAddContactOpen){
         return null
-    }
-
-    function submit(formData){
-        console.lof(formData)
     }
 
     return(

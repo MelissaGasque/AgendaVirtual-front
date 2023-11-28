@@ -4,7 +4,7 @@ import { Button, Input } from "../../index.components"
 import { useForm } from "react-hook-form"
 
 
-export function UpdateContato(){
+export function UpdateClient(){
     const { modalUpdateOpen, setModalUpdateOpen, updateClient,  deleteClientAPI } = useContext(InternalContext)
 
 

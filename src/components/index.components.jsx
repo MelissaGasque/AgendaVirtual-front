@@ -4,7 +4,9 @@ import { Input } from "./inputs"
 import { AdicionarContato } from "../components/modals/modalAddContato"
 import { ModalCadastro } from "../components/modals/modalCadastro"
 import { ModalOtherClients } from "../components/modals/modalOtherClients"
-import { UpdateContato } from "../components/modals/modalUpdateCadastro"
+import { UpdateClient} from "./modals/modalUpdateClient"
+import { UpdateContact } from "./modals/modalUpdateContact"
+import { DeleteContact } from "./modals/modalDeleteContact"
 
 
-export { Button, Input, AdicionarContato, ModalCadastro, ModalOtherClients, UpdateContato }
+export { Button, Input, AdicionarContato, ModalCadastro, ModalOtherClients, UpdateClient, UpdateContact, DeleteContact } 
