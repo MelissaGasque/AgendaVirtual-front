@@ -1,13 +1,14 @@
 import { useContext } from "react"
 import { InternalContext } from "../../../providers/ContextProjectInternal"
 import { Button } from "../../buttons"
+import { StyledBackdrop, StyledModal, StyleButtons } from "./style"
+import { StyleTitle2 } from "../../../styles/typography"
 
 
 export function DeleteContact(){
     const { modalDeleteContat, setModalDeleteContact, deleteContact } = useContext(InternalContext)
 
     async function deletar(){
-        console.log("clicou em deletar")
         deleteContact()
     }
 
@@ -19,13 +20,14 @@ export function DeleteContact(){
         return null
     }
     return(
-        <div>
-            <h1>Deseja mesmo excluir o usuario X?</h1>
-            <div>
-                <Button onClick={deletar}>Excluir</Button>
-                <Button onClick={cancelar}>Cancelar</Button>
-            </div>
-        </div>
-
+        <StyledBackdrop>
+            <StyledModal>
+                <StyleTitle2>Deseja excluir o contato?</StyleTitle2>
+                <StyleButtons>
+                    <Button button="button2" onClick={deletar}>Excluir</Button>
+                    <Button button="button4" onClick={cancelar}>Cancelar</Button>
+                </StyleButtons>
+            </StyledModal>
+        </StyledBackdrop>
     )
 }

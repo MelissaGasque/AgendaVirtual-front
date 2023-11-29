@@ -12,7 +12,6 @@ export function ModalCadastro(){
 
 
     function submit(formData){
-        console.log(formData)
         if (formData.admin == "true"){
             formData.admin = true
             registrationAPI(formData)

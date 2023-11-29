@@ -7,6 +7,11 @@ import { ModalOtherClients } from "../components/modals/modalOtherClients"
 import { UpdateClient} from "./modals/modalUpdateClient"
 import { UpdateContact } from "./modals/modalUpdateContact"
 import { DeleteContact } from "./modals/modalDeleteContact"
+import { HeaderLogoTitle } from "./header/index"
 
 
-export { Button, Input, AdicionarContato, ModalCadastro, ModalOtherClients, UpdateClient, UpdateContact, DeleteContact } 
+export {
+    Button, Input,
+    AdicionarContato, ModalCadastro, ModalOtherClients, UpdateClient, UpdateContact, DeleteContact,
+    HeaderLogoTitle
+} 

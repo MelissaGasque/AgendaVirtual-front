@@ -1,9 +1,11 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect } from "react"
 import { ClientContext, InternalContext } from "../../providers/index.providers"
-import { Button } from "../../components/buttons"
+import { Button, HeaderLogoTitle } from "../../components/index.components"
 import { AdicionarContato, ModalOtherClients, UpdateClient, UpdateContact, DeleteContact } from "../../components/index.components"
 import { api } from "../../service/api"
-
+import { HeaderHome } from "../../components/header/style"
+import { Header, ContainerMain, Main, MainCumprimento, MainCorpo, Contat, ListaUL, ListaLI, Configuracoes,   MostrarDados } from "./style"
+import { StyleTitle2, StyleTitle3, StyleName } from "../../styles/typography"
 
 export function InternalPage(){
 
@@ -60,42 +62,48 @@ export function InternalPage(){
 
     return(
         <>
-        <div>
-            <header>
-                <div>
-                    {/* <img src={} alt="logo da empresa"/> */}
-                    <h1>Sua agenda virtual</h1>
-                </div>
-                <Button onClick= { logOut } > Sair </Button>
-            </header>
-        </div>
-        <main>
-            <div>
-                <h2>Olá, {clientUsername[0].toUpperCase() + clientUsername.slice(1)}!</h2>
-                <h3> Seus contatos: </h3>
-                <ul>
-                    {listContacts.map((contact) => (
-                        <li key={contact.id}>
-                            <h5>{contact.full_name}{' '}
-                            <Button onClick={() => editContact(contact.id)}>Editar</Button>{' '}
-                            <Button onClick={() => deleteContact(contact.id)}>Deletar</Button>
-                            </h5>
-                            <p>email: {contact.email}</p>
-                            <p>telefone: {contact.phone_number}</p>
-                            <p>Outras informações sobre o contato: {contact.other_information}</p>
-                            <p>Data de criação: {contact.created_at}</p>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-            <div>
-                <Button onClick= { openModalAddContacts }>Adicionar Contato</Button>
-                <Button onClick= { openModalUpdateClient }>Alterar dados</Button>
-                { (clientAdmin && <Button onClick= { openModalVerifyOtherClients }>Meus dados e Clientes</Button>)
-                    || (!clientAdmin && <Button onClick= { openModalVerifyOtherClients }>Meus Dados</Button>)
-                }
-            </div>
-        </main>
+        <Header>
+            <HeaderHome>
+                <HeaderLogoTitle/>
+                <Button button="button1" onClick= { logOut } > Sair </Button>
+            </HeaderHome>
+        </Header>
+        <ContainerMain>
+            <Main>
+                <MainCorpo>
+                    <MostrarDados>
+                        <StyleTitle3> Seus contatos: </StyleTitle3>
+                        <ListaUL>
+                            {listContacts.map((contact) => (
+                                <ListaLI key={contact.id}>
+                                    <Contat>
+                                        <StyleName>{contact.full_name}</StyleName>
+                                        <div>
+                                            <Button button="button3" onClick={() => editContact(contact.id)}>Editar</Button>{' '}
+                                            <Button button="button3" onClick={() => deleteContact(contact.id)}>Deletar</Button>
+                                        </div>
+                                    </Contat>
+                                    <p>email: {contact.email}</p>
+                                    <p>telefone: {contact.phone_number}</p>
+                                    <p>Outras informações sobre o contato: {contact.other_information}</p>
+                                    <p>Data de criação: {contact.created_at}</p>
+                                </ListaLI>
+                            ))}
+                        </ListaUL>
+                    </MostrarDados>
+                    <Configuracoes>
+                        <MainCumprimento>
+                            <StyleTitle2>Olá, {clientUsername[0].toUpperCase() + clientUsername.slice(1)}!</StyleTitle2>
+                        </MainCumprimento>
+                        <Button  button="button2" onClick= { openModalAddContacts }>Adicionar Contato</Button>
+                        <Button  button="button2" onClick= { openModalUpdateClient }>Alterar dados</Button>
+                        { (clientAdmin && <Button  button="button2" onClick= { openModalVerifyOtherClients }>Meus dados e Clientes</Button>)
+                            || (!clientAdmin && <Button  button="button2" onClick= { openModalVerifyOtherClients }>Meus Dados</Button>)
+                        }
+                    </Configuracoes>
+                </MainCorpo>
+            </Main>
+        </ContainerMain>
         <AdicionarContato/>
         <UpdateClient/>
         <ModalOtherClients/>

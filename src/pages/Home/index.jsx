@@ -1,8 +1,10 @@
-import { Button, Input } from "../../components/index.components"
-import { ModalCadastro } from "../../components/modals/modalCadastro"
+import { Button, Input, ModalCadastro, HeaderLogoTitle } from "../../components/index.components"
 import { useForm } from "react-hook-form"
 import { useContext} from "react" 
 import { ClientContext } from "../../providers/ContextProject"
+import { HeaderHome } from "../../components/header/style"
+import { Header, Form, Main } from "./style"
+
 
 
 export function HomePage(){
@@ -21,17 +23,14 @@ export function HomePage(){
 
     return(
         <>
-            <div>
-                <header>
-                    <div>
-                        {/* <img src={} alt="logo da empresa"/> */}
-                        <h1>Sua agenda virtual</h1>
-                    </div>
-                    <Button onClick= { openModal } > Cadastro </Button>
-                </header>
-            </div>
-            <main>
-                <form onSubmit = { handleSubmit(submit) }>
+            <Header>
+                <HeaderHome>
+                    <HeaderLogoTitle/>
+                    <Button button="button1" onClick= { openModal } > Cadastro </Button>
+                </HeaderHome>
+            </Header>
+            <Main>
+                <Form onSubmit = { handleSubmit(submit) }>
                     <Input
                         type="text"
                         placeholder="Digite seu username"
@@ -42,11 +41,9 @@ export function HomePage(){
                         placeholder="Digite sua senha"
                         {...register("password")}
                     />
-                    <div>
-                        <Button type="submit">Entrar</Button>
-                    </div>
-                </form>
-            </main>
+                    <Button button="button1" type="submit">Entrar</Button> 
+                </Form>
+            </Main>
             <ModalCadastro/>
         </>
     )
