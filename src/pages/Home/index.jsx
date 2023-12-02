@@ -1,24 +1,25 @@
-import { Button, Input, ModalCadastro, HeaderLogoTitle } from "../../components/index.components"
+import { Button, Input, HeaderLogoTitle } from "../../components/index.components"
 import { useForm } from "react-hook-form"
 import { useContext} from "react" 
 import { ClientContext } from "../../providers/ContextProject"
 import { HeaderHome } from "../../components/header/style"
 import { Header, Form, Main } from "./style"
-
+import { useNavigate } from "react-router-dom"
 
 
 export function HomePage(){
-    const { login, setIsOpen } = useContext(ClientContext)
+    const { login } = useContext(ClientContext)
+    const navigate = useNavigate()
 
     const { register, handleSubmit, reset } = useForm()
+
+    function cadastro(){
+        navigate("/register")
+    }
 
     function submit(formData){
         login(formData)
         reset()
-    }
-
-    function openModal(){
-        setIsOpen(true)
     }
 
     return(
@@ -26,7 +27,7 @@ export function HomePage(){
             <Header>
                 <HeaderHome>
                     <HeaderLogoTitle/>
-                    <Button button="button1" onClick= { openModal } > Cadastro </Button>
+                    <Button button="button1" onClick={cadastro} > Cadastro </Button> 
                 </HeaderHome>
             </Header>
             <Main>
@@ -44,7 +45,6 @@ export function HomePage(){
                     <Button button="button1" type="submit">Entrar</Button> 
                 </Form>
             </Main>
-            <ModalCadastro/>
         </>
     )
 }

@@ -1,13 +1,16 @@
-import React from "react"
+import { forwardRef } from "react"
 import { StyledInput } from "./style"
 
-export const Input = React.forwardRef(function Input({ label, type, placeholder, id, ...rest }, ref) {
+export const Input = forwardRef(({ error, type, placeholder, id, ...rest }, ref) => {
     return (
-        <StyledInput
+
+          <StyledInput
           type={type}
           placeholder={placeholder}
           ref={ref}
           {...rest}
         />
+
     )
+       
   })

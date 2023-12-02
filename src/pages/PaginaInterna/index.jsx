@@ -17,10 +17,11 @@ export function InternalPage(){
 
     const clientUsername = clientUser.username
     const clientAdmin = clientUser.admin
-
+    
     useEffect(() => {
         async function generateListContacts(){
             const token = localStorage.getItem("@clientToken")
+
             try {
                 const { data }= await api.get("/contacts", {
                     headers:{
@@ -30,6 +31,7 @@ export function InternalPage(){
             }catch(error){
                 console.log(error)
             }
+            
         }
         generateListContacts()
     }, [])
@@ -97,7 +99,7 @@ export function InternalPage(){
                         </MainCumprimento>
                         <Button  button="button2" onClick= { openModalAddContacts }>Adicionar Contato</Button>
                         <Button  button="button2" onClick= { openModalUpdateClient }>Alterar dados</Button>
-                        { (clientAdmin && <Button  button="button2" onClick= { openModalVerifyOtherClients }>Meus dados e Clientes</Button>)
+                        { (clientAdmin && <Button  button="button2" onClick= { openModalVerifyOtherClients }> Todos os Clientes</Button>)
                             || (!clientAdmin && <Button  button="button2" onClick= { openModalVerifyOtherClients }>Meus Dados</Button>)
                         }
                     </Configuracoes>

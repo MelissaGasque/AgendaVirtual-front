@@ -8,9 +8,7 @@ import { ProjectProvider } from './providers/ContextProject.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <ProjectProvider>
         <App />
-      </ProjectProvider>
     </BrowserRouter>
   </React.StrictMode>,
 )

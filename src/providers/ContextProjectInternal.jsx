@@ -4,7 +4,7 @@ import { ClientContext } from "./ContextProject"
 
 export const InternalContext = createContext({})
 export function ProjectProviderInternal({children}){
-    const { logout } = useContext(ClientContext)
+    const { logout, setClientUser, } = useContext(ClientContext)
 
     const [ modalUpdateOpen, setModalUpdateOpen ] = useState(false)
     const [ modalAddContactOpen, setModalAddContactOpen ] = useState(false)
@@ -12,6 +12,7 @@ export function ProjectProviderInternal({children}){
     const [ modalUpdateContactOpen, setModalUpdateContactOpen ] = useState(false)
     const [ modalDeleteContat, setModalDeleteContact ] = useState(false)
     const [ listContacts, setListContacts ] = useState([])
+    const [ listClients, setListClients ] = useState([]) 
     const [ contactId, setContactId ] = useState("")
 
     async function createContact(formData){
@@ -22,7 +23,6 @@ export function ProjectProviderInternal({children}){
                   Authorization:` Bearer ${token}`
                 }
             })
-            console.log("criou contato")
             setListContacts((listContacts) => [...listContacts, formData])
             // mostra que deu certo
         } catch (error) {
@@ -39,7 +39,8 @@ export function ProjectProviderInternal({children}){
                 }
             })
             setModalUpdateOpen(false)
-            setModalOtherClientsOpen(true)
+            setClientUser((clientUser) => ({ ...clientUser, ...formData }))
+            setListClients((listClients) => [...listClients, formData])
             // mostra que deu certo
         } catch (error) {
             console.log("não rolou o update")
@@ -49,7 +50,6 @@ export function ProjectProviderInternal({children}){
     async function deleteClientAPI(id){
         const token = localStorage.getItem("@clientToken")
         try{
-            console.log(id)
             await api.delete(`/clients/${id}`, {
                 headers:{
                     Authorization: `Bearer ${token}`
@@ -108,7 +108,7 @@ export function ProjectProviderInternal({children}){
             value={{ modalUpdateOpen, setModalUpdateOpen, modalAddContactOpen, setModalAddContactOpen,
             modalOtherClientsOpen, setModalOtherClientsOpen, modalUpdateContactOpen, setModalUpdateContactOpen,
             modalDeleteContat, setModalDeleteContact, updateClient, deleteClientAPI, createContact, listContacts,
-            setListContacts, updateContact, contactId, setContactId, deleteContact }}>
+            setListContacts, updateContact, contactId, setContactId, deleteContact, listClients, setListClients }}>
                 {children}
         </InternalContext.Provider>
     )

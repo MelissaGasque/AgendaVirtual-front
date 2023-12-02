@@ -5,7 +5,7 @@ export const StyledButton = styled.button`
     font-size: 20px;
     font-weight: 600;
     padding: 1rem;
-    border-radius: 0.25rem;
+    border-radius: 0.8rem;
     background-color: var(--color-roxo-2);
     border: solid 5px var(--color-roxo-1);
     &:hover {
@@ -48,6 +48,41 @@ export const StyledButton = styled.button`
             return css`
                 width: 20rem;
                 background-color: var(--color-amarelo);
+            `
+        }
+    }}
+    ${({$button}) => {
+        if($button === "button5"){
+            return css`
+                 width: 1rem;
+                height: 1rem;
+                font-size: 0.8rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `
+        }
+    }}
+     ${({$button}) => {
+        if($button === "button6"){
+            return css`
+                width: 20rem;
+                height: 5rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `
+        }
+    }}
+      ${({$button}) => {
+        if($button === "button7"){
+            return css`
+                 width: 0.5rem;
+                height: 0.5rem;
+                font-size: 0.9rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             `
         }
     }}

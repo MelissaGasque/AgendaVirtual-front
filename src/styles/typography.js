@@ -19,3 +19,30 @@ export const StyleName = styled.h5`
     font-size: 1rem;
     margin-top: 1rem;
 `
+export const StyleTitle4 = styled.h3`
+	font-weight: 500;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-rosa-escuro);     
+`
+export const StyleTitle5 = styled.h3`
+	font-weight: 500;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-rosa-escuro);     
+`
+export const StyleTitle6 = styled.h5`
+	font-weight: 500;
+    font-size: 1.2rem;
+    color: var(--color-rosa-escuro);     
+`
+export const StyleTitle7 = styled.h5`
+	font-weight: 500;
+    font-size: 1rem;
+`
+export const StyleTextErro = styled.p`
+    color: black;
+    font-size: 0.625rem;
+    display: block;
+
+`

@@ -2,7 +2,8 @@ import { useForm } from "react-hook-form"
 import { useContext } from "react"
 import { InternalContext } from "../../../providers/ContextProjectInternal"
 import { Button, Input } from "../../index.components"
-
+import { StyledBackdrop, StyledModal, StyleHeader, StyledForm } from "./style"
+import { StyleTitle4 } from "../../../styles/typography"
 
 export function UpdateContact(){
     const { modalUpdateContactOpen, setModalUpdateContactOpen, updateContact } = useContext(InternalContext)
@@ -26,12 +27,13 @@ export function UpdateContact(){
     }
 
     return(
-        <>
-            <div>
-                <h2> Atualização do contato </h2>
-                <Button button="x" onClick={closeModal}>X</Button>
-            </div>
-            <form onSubmit = { handleSubmit(submit) }>
+        <StyledBackdrop>
+        <StyledModal>
+            <StyleHeader>
+                <StyleTitle4> Atualização do contato </StyleTitle4>
+                <Button  button="button5" onClick={closeModal}>X</Button>
+            </StyleHeader>
+            <StyledForm onSubmit = { handleSubmit(submit) }>
                 <Input
                     type="text"
                     placeholder="Alterar nome"
@@ -52,10 +54,9 @@ export function UpdateContact(){
                     placeholder="Alterar Informações"
                     {...register("other_information")}
                 />
-                <div>
-                    <Button type="submit">Atualizar</Button>
-                </div>
-            </form>
-        </>
+                <Button button="button1" type="submit">Atualizar</Button>
+            </StyledForm>
+        </StyledModal>
+        </StyledBackdrop>
     )
 }

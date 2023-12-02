@@ -15,7 +15,7 @@ export const StyledModal = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     width: 31.25rem;
-    height: 25.6875rem;
+    height: 29rem;
     background-color:var(--color-azul-2);
 
     @media(max-width: 867px){
@@ -32,7 +32,7 @@ export const StyleHeader = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 75%;
+    width: 85%;
     margin-left: 2rem;
     margin-bottom: 1rem;
 `
@@ -43,9 +43,3 @@ export const StyledForm = styled.form`
     align-items: center;
     gap:0.5rem;
 `
-export const StyledButtons = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-`   

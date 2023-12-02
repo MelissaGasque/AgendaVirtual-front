@@ -2,6 +2,8 @@ import { InternalContext } from "../../../providers/index.providers"
 import { Button, Input } from "../../index.components"
 import { useContext } from "react"
 import { useForm } from "react-hook-form"
+import { StyledBackdrop, StyledModal, StyleHeader, StyledForm, StyledTextArea } from "./style"
+import { StyleTitle5 } from "../../../styles/typography"
 
 
 export function AdicionarContato(){
@@ -11,7 +13,6 @@ export function AdicionarContato(){
     
     function submit(formData){
         createContact(formData)
-        // console.log(formData)
         reset()
     }
 
@@ -24,12 +25,13 @@ export function AdicionarContato(){
     }
 
     return(
-        <>
-            <div>
-                <h2> Todos os clientes </h2>
-                <Button button="x" onClick={closeModal}>X</Button>
-            </div>
-            <form onSubmit = { handleSubmit(submit) }>
+        <StyledBackdrop>
+        <StyledModal>
+            <StyleHeader>
+                <StyleTitle5 > Adicionar Contato </StyleTitle5>
+                <Button button="button5" onClick={closeModal}>X</Button>
+            </StyleHeader>
+            <StyledForm onSubmit = { handleSubmit(submit) }>
                 <Input
                     type="text"
                     placeholder="Nome do Contato"
@@ -45,14 +47,13 @@ export function AdicionarContato(){
                     placeholder="Telefone do contato"
                     {...register("phone_number")}
                 />
-                <textarea
+                <StyledTextArea
                     placeholder="Outras informações"
                     {...register("other_information")}
                 />
-                <div>
-                    <Button type="submit">Adicionar Contato</Button>
-                </div>
-            </form>
-        </>
+                <Button button="button6" type="submit">Adicionar Contato</Button>
+            </StyledForm>
+        </StyledModal>
+        </StyledBackdrop>
     )
 }

@@ -2,13 +2,14 @@ import { useContext, useEffect, useState } from "react"
 import { InternalContext, ClientContext } from "../../../providers/index.providers"
 import { Button } from "../../index.components"
 import { api } from "../../../service/api"
-
+import { StyledBackdrop, StyledModal, ButtonDiv, MainPessoal, MainClients, AllClientsUl, AllClientsLi  } from "./style"
+import { StyleTitle4, StyleTitle6, StyleTitle7 } from "../../../styles/typography"
 
 export function ModalOtherClients(){ 
-    const { modalOtherClientsOpen, setModalOtherClientsOpen } = useContext(InternalContext)
+    const { modalOtherClientsOpen, setModalOtherClientsOpen, listClients, setListClients } = useContext(InternalContext)
     const { clientUser } = useContext(ClientContext)
 
-    const [ listClients, setListClients ] = useState([]) 
+    // const [ listClients, setListClients ] = useState([]) 
 
     useEffect(() => {
         async function generateList(){
@@ -38,42 +39,39 @@ export function ModalOtherClients(){
 
     const isClientAdmin = clientUser && clientUser.admin;
     return(
-        <>            
-            <div>
-            <Button button="x" onClick={closeModal}>X</Button>
-            </div>
-            <div>
-                <h2> Olá {clientUser.username} </h2>
-                <p>Nome Completo: {clientUser.full_name}</p>
-                <div>
-                    <p>Email {clientUser.email} </p> 
-                    <Button>Adicionar outros</Button>
-                </div>
-                <div>
-                    <p>Telefone: {clientUser.phone_number} </p>
-                    <Button>Adicionar outros</Button>
-                </div>
-            </div> 
-            
+        <StyledBackdrop>
+        <StyledModal>
+            <ButtonDiv>
+                <Button button="button7" onClick={closeModal}>X</Button>
+            </ButtonDiv>
+            <main>
+            {!isClientAdmin && (
+                <MainPessoal>
+                    <StyleTitle4> Olá {clientUser.username} </StyleTitle4>
+                    <StyleTitle6>Nome Completo: {clientUser.full_name}</StyleTitle6>
+                    <StyleTitle6>Email {clientUser.email} </StyleTitle6> 
+                    <StyleTitle6>Telefone: {clientUser.phone_number} </StyleTitle6>
+                </MainPessoal> 
+            )}                
             {isClientAdmin && Array.isArray(listClients) && (      
-                <div>
-                    <h1> LISTA DE CLIENTES AQUI </h1>
-                    <ul>
+                <MainClients>
+                    <AllClientsUl >
                         {listClients.map((client) => (
-                            <li key={client.id}>
-                                <h4>Nome: {client.full_name} </h4>
-                                <h5>username: {client.username}</h5>
-                                <p>Email: {client.email}</p>
-                                <p>telefone: {client.phone_number}</p>
-                                <p> Criado em: {client.created_at}</p>
-                            </li>
+                            <AllClientsLi  key={client.id}>
+                                <StyleTitle6>{client.full_name} </StyleTitle6>
+                                <StyleTitle7>username: {client.username}</StyleTitle7>
+                                <StyleTitle7>Email: {client.email}</StyleTitle7>
+                                <StyleTitle7>telefone: {client.phone_number}</StyleTitle7>
+                                <StyleTitle7> Criado em: {client.created_at}</StyleTitle7>
+                            </AllClientsLi>
                         ))}
-                    </ul>
-                </div> 
+                    </AllClientsUl>
+                </MainClients> 
             )}
-            <div>
-                <Button onClick={ closeModal }> Fechar </Button>
-            </div>
-        </>
+            </main>
+     
+        </StyledModal>            
+        
+        </StyledBackdrop>
     )
 }
