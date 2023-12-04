@@ -32,3 +32,5 @@ npm run dev
 Para o projeto funcionar corretamente é necessário rodar a API do arquivo backend.
 
 <img src="/src/imagens/paginaPrincipal.png">
+<img src="/src/imagens/register.png">
+<img src="/src/imagens/internalPage.png">
