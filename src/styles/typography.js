@@ -1,4 +1,4 @@
-import styled, {css} from "styled-components"
+import styled from "styled-components"
 
 export const StyleTitle = styled.h1`
 	font-weight: 700;
@@ -42,7 +42,8 @@ export const StyleTitle7 = styled.h5`
 `
 export const StyleTextErro = styled.p`
     color: black;
-    font-size: 0.625rem;
-    display: block;
-
+    width: 100%;
+    height: 20px;
+    font-size: 14px;
+    color: var(--color-amarelo);
 `

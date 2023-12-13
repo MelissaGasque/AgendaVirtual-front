@@ -38,7 +38,6 @@ export const MainCorpo = styled.div`
     @media(max-width: 975px) {
         flex-direction: column-reverse;
     }
-    /* background-color: purple; */
 `
 export const Configuracoes = styled.div`
     display: flex;

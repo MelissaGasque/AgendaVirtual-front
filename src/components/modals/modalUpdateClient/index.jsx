@@ -48,6 +48,11 @@ export function UpdateClient(){
                         {...register("full_name")}
                     />
                     <Input
+                        type="text"
+                        placeholder="Alterar nome de usuário"
+                        {...register("username")}
+                    />
+                    <Input
                         type="email"
                         placeholder="Alterar email"
                         {...register("email")}

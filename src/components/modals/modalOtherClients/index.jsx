@@ -9,8 +9,6 @@ export function ModalOtherClients(){
     const { modalOtherClientsOpen, setModalOtherClientsOpen, listClients, setListClients } = useContext(InternalContext)
     const { clientUser } = useContext(ClientContext)
 
-    // const [ listClients, setListClients ] = useState([]) 
-
     useEffect(() => {
         async function generateList(){
             const token = localStorage.getItem("@clientToken")

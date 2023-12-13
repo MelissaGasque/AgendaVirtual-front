@@ -1,6 +1,8 @@
 import { createContext, useState, useContext } from "react"
 import { api } from "../service/api"
 import { ClientContext } from "./ContextProject"
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export const InternalContext = createContext({})
 export function ProjectProviderInternal({children}){
@@ -15,21 +17,6 @@ export function ProjectProviderInternal({children}){
     const [ listClients, setListClients ] = useState([]) 
     const [ contactId, setContactId ] = useState("")
 
-    async function createContact(formData){
-        const token = localStorage.getItem("@clientToken")
-        try {
-            await api.post(`/contacts`, formData, {
-                headers:{
-                  Authorization:` Bearer ${token}`
-                }
-            })
-            setListContacts((listContacts) => [...listContacts, formData])
-            // mostra que deu certo
-        } catch (error) {
-            console.log("não criou contato")
-        }
-    }
-
     async function updateClient(formData, id){
         const token = localStorage.getItem("@clientToken")
         try {
@@ -38,12 +25,16 @@ export function ProjectProviderInternal({children}){
                   Authorization:` Bearer ${token}`
                 }
             })
-            setModalUpdateOpen(false)
             setClientUser((clientUser) => ({ ...clientUser, ...formData }))
             setListClients((listClients) => [...listClients, formData])
-            // mostra que deu certo
+            toast.success("Atualização realizada!")
+            setTimeout(() => {
+                setModalUpdateOpen(false)
+                window.location.reload();
+            }, 1000);
         } catch (error) {
-            console.log("não rolou o update")
+            const errorMessage = error.response.data.message || "Erro desconhecido";
+            toast.error("Erro ao atualizar: " + errorMessage)
         }
     }
 
@@ -56,14 +47,33 @@ export function ProjectProviderInternal({children}){
                 }
             })
             logout()
-        } catch(erro){
-            console.log(erro)
+        } catch(error){
+            const errorMessage = error.response.data.message || "Erro desconhecido";
+            toast.error("Erro ao deletar: " + errorMessage)
+        }
+    }
+
+    async function createContact(formData){
+        const token = localStorage.getItem("@clientToken")
+        try {
+            await api.post(`/contacts`, formData, {
+                headers:{
+                  Authorization:` Bearer ${token}`
+                }
+            })
+            setListContacts((listContacts) => [...listContacts, formData])
+            setModalAddContactOpen(false)
+            window.location.reload()
+        } catch (error) {
+            const errorMessage = error.response.data.message || "Erro desconhecido";
+            toast.error("Contato não foi criado " + errorMessage)
         }
     }
 
     async function updateContact(formData){
         const token = localStorage.getItem("@clientToken")
         const contact_Id = contactId
+        console.log(contact_Id)
         try {
             await api.patch(`/contacts/${contact_Id}`, formData, {
                 headers:{
@@ -76,15 +86,18 @@ export function ProjectProviderInternal({children}){
                 return listContacts.map((contact) =>
                   contact.id === contact_Id ? { ...contact, ...formData } : contact
                 )
-              })
+            })
+            toast.success("Contato atualizado")
         } catch (error) {
-            console.log("não rolou o update")
+            const errorMessage = error.response.data.message || "Erro desconhecido";
+            toast.error("Erro ao atualizar o Contato: " + errorMessage)
         }
     }
 
     async function deleteContact(){
         const token = localStorage.getItem("@clientToken")
         const contact_Id = contactId
+        console.log(contact_Id)
         
         try{
             await api.delete(`/contacts/${contact_Id}`, {
@@ -99,8 +112,10 @@ export function ProjectProviderInternal({children}){
      
             setModalDeleteContact(false)
             setContactId("")
-        } catch(erro){
-            console.log(erro)
+            toast.success("Contato deletado")
+        } catch(error){
+            const errorMessage = error.response.data.message || "Erro desconhecido";
+            toast.error("Erro ao deletar o Contato: " + errorMessage)
         }
     }
     return(

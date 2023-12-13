@@ -87,8 +87,7 @@ export function InternalPage(){
                                     </Contat>
                                     <p>email: {contact.email}</p>
                                     <p>telefone: {contact.phone_number}</p>
-                                    <p>Outras informações sobre o contato: {contact.other_information}</p>
-                                    <p>Data de criação: {contact.created_at}</p>
+                                    <p>{contact.other_information}</p>
                                 </ListaLI>
                             ))}
                         </ListaUL>

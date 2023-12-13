@@ -1,6 +1,8 @@
 import { createContext, useState, useEffect } from "react"
 import { api } from "../service/api"
 import { useNavigate } from "react-router-dom"
+import { toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export const ClientContext = createContext({})
 export function ProjectProvider({children}){
@@ -22,7 +24,6 @@ export function ProjectProvider({children}){
            }
            api.defaults.headers.common.Authorization = `Bearer ${token}`
            setClientUser(client)
-           console.log(clientUser)
            setLoading(false)
         }, [])
 
@@ -33,8 +34,6 @@ export function ProjectProvider({children}){
                 const token = response.data.token.token
                 const clientId = response.data.token.user.id
                 const clientUser = response.data.token.user
-            
-                // api.defaults.headers.common.Authorization = `Bearer ${token}`
 
                 localStorage.setItem("@clientToken", token)
                 localStorage.setItem("@clientID", clientId)
@@ -42,23 +41,22 @@ export function ProjectProvider({children}){
                 setClientUser(clientUser)
                 localStorage.setItem("@client", JSON.stringify(clientUser))
                 navigate("/internalPage")
-             
             } catch (error) {
-              console.log("Não foi possível realizar o login", error)
+                const errorMessage = error.response.data.message || "Erro desconhecido"
+                toast.error(errorMessage)
             }
           }
 
 
-    async function registration(formData){
-        try{
-            await api.post("/clients", formData)
-            navigate("/")
-        }catch (error){
-            // toast.error("Ops! Algo deu errado")
-            console.log("não foi criada")
+    async function registration(formData) {
+        try {
+            await api.post("/clients", formData);
+            navigate("/");
+        } catch (error) {
+          const errorMessage = error.response.data.message || "Erro desconhecido";
+          toast.error("Usuário não criado: " + errorMessage);
         }
       }
-    
 
     function logout(){
         localStorage.removeItem("@clientToken")

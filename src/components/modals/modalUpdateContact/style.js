@@ -17,6 +17,7 @@ export const StyledModal = styled.div`
     width: 31.25rem;
     height: 29rem;
     background-color:var(--color-azul-2);
+    border-radius: 0.5rem;
 
     @media(max-width: 867px){
         width: 90%

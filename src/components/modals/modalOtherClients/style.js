@@ -17,6 +17,7 @@ export const StyledModal = styled.div`
     width: 35rem;
     height: 30rem;
     background-color:var(--color-azul-2);
+    border-radius: 0.5rem;
 
     @media(max-width: 867px){
         width: 90%
@@ -44,6 +45,9 @@ export const MainPessoal = styled.div`
     gap:2rem;
     border-radius: 0.6rem ;
     border: 5px solid var(--color-rosa-escuro);
+    padding: 2rem;
+    margin-top: -2rem;
+    margin-left: -2.5rem;
 `
 export const MainClients = styled.div`
     display: flex;
@@ -66,4 +70,5 @@ export const AllClientsLi = styled.li`
     background-color: var(--color-amarelo);
     border: solid 2px var(--color-rosa-escuro);
     border-radius: 0.5rem;
+    padding: 1rem;
 `
