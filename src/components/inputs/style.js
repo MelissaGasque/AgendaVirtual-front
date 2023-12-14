@@ -1,7 +1,7 @@
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
 export const StyledInput = styled.input`
-    width: 20rem;
+    width: 85%;
     font-size: 18px;
     font-weight: 600;
     padding: 1rem;

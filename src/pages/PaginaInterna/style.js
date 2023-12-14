@@ -69,8 +69,18 @@ export const ListaUL = styled.div`
     flex-direction: column;
     gap:0.4rem;
     overflow-y: scroll;
-   
+
+    &::-webkit-scrollbar {
+        width: 20px;
+        background-color: var(--color-roxo-2);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        width: 10px;
+        background-color: var(--color-rosa-claro);
+    }
 `
+
 
 export const ListaLI = styled.li`
     border: 5px solid var(--color-amarelo);

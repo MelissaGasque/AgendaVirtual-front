@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form"
 import { useContext} from "react" 
 import { ClientContext } from "../../providers/ContextProject"
 import { HeaderHome } from "../../components/header/style"
-import { Header, Form, Main } from "./style"
+import { Header, Form, InputDiv, Main } from "./style"
 import { useNavigate } from "react-router-dom"
 import { SchemaLogin } from "../../schema/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -37,20 +37,20 @@ export function HomePage(){
             </Header>
             <Main>
                 <Form onSubmit = { handleSubmit(submit) }>
-                    <div>
+                    <InputDiv>
                         <Input
                             type="text"
                             placeholder="Nome de usuário"
                             {...register("username")}
                         /> {errors.username ? <StyleTextErro>{errors.username.message}</StyleTextErro> : null }
-                    </div>
-                    <div>
+                    </InputDiv>
+                    <InputDiv>
                         <Input
                             type="password"
                             placeholder="Senha"
                             {...register("password")}
                         /> {errors.password ? <StyleTextErro>{errors.password.message}</StyleTextErro> : null }
-                    </div>
+                    </InputDiv>
                     <Button button="button1" type="submit">Entrar</Button> 
                 </Form>
             </Main>

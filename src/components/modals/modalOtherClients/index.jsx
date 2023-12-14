@@ -45,7 +45,7 @@ export function ModalOtherClients(){
             <main>
             {!isClientAdmin && (
                 <MainPessoal>
-                    <StyleTitle4> Olá {clientUser.username} </StyleTitle4>
+                    <StyleTitle4> Olá, {clientUser.username} </StyleTitle4>
                     <StyleTitle6>Nome Completo: {clientUser.full_name}</StyleTitle6>
                     <StyleTitle6>Email {clientUser.email} </StyleTitle6> 
                     <StyleTitle6>Telefone: {clientUser.phone_number} </StyleTitle6>

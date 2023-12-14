@@ -35,12 +35,21 @@ export const StyleForm = styled.form`
 
 export const StyleFormDiv = styled.div`
     margin-top: 1rem;
+    width: 95%;
     display: flex;
-    justify-content: space-around;
-    gap:2rem;
-    flex-wrap: wrap;
-
+    justify-content: space-between;
+    @media(max-width: 670px){
+        flex-wrap: wrap;
+    }
 `
+
+export const StyleInputDiv = styled.div`
+    width: 50%;
+    @media(max-width: 670px){
+        width: 100%;
+    }
+`
+
 export const StyleRadioContainer = styled.div`
     width: 95%;
     margin-top: 0.5rem;
@@ -54,6 +63,10 @@ export const StyleRadio = styled.div`
     background-color: var(--color-amarelo);
     border-radius: 0.5rem;
     padding-bottom: 1rem;
+    @media(max-width: 670px){
+        width: 50%;
+        margin-bottom: 1rem;
+    }
 `
 export const StyleRadioTitle = styled.div`
     display: flex;

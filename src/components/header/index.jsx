@@ -6,7 +6,7 @@ import { StyleTitle } from "../../styles/typography"
 export function HeaderLogoTitle(){
     return(
         <HeaderTitleLogo>
-            <LogoImg src={ Logo } alt="logo da empresa: Uma agenda laranja com vermelho e com expiral azul"/>
+            <LogoImg src={ Logo } alt="logo: Uma agenda laranja com vermelho e com expiral azul"/>
             <StyleTitle>Sua agenda virtual</StyleTitle>
         </HeaderTitleLogo>
     )

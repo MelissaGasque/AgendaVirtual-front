@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react"
+import { createContext, useState, useContext, useEffect } from "react"
 import { api } from "../service/api"
 import { ClientContext } from "./ContextProject"
 import { toast } from 'react-toastify'
@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 export const InternalContext = createContext({})
 export function ProjectProviderInternal({children}){
-    const { logout, setClientUser, } = useContext(ClientContext)
+    const { logout, setClientUser, clientUser } = useContext(ClientContext)
 
     const [ modalUpdateOpen, setModalUpdateOpen ] = useState(false)
     const [ modalAddContactOpen, setModalAddContactOpen ] = useState(false)
@@ -16,6 +16,10 @@ export function ProjectProviderInternal({children}){
     const [ listContacts, setListContacts ] = useState([])
     const [ listClients, setListClients ] = useState([]) 
     const [ contactId, setContactId ] = useState("")
+
+    useEffect(() => {
+        localStorage.setItem("@client", JSON.stringify(clientUser))
+    }, [clientUser])
 
     async function updateClient(formData, id){
         const token = localStorage.getItem("@clientToken")
@@ -29,12 +33,11 @@ export function ProjectProviderInternal({children}){
             setListClients((listClients) => [...listClients, formData])
             toast.success("Atualização realizada!")
             setTimeout(() => {
-                setModalUpdateOpen(false)
-                window.location.reload();
-            }, 1000);
+                setModalUpdateOpen(false);
+                window.location.reload()
+            }, 2000);   
         } catch (error) {
-            const errorMessage = error.response.data.message || "Erro desconhecido";
-            toast.error("Erro ao atualizar: " + errorMessage)
+            toast.error("Erro ao atualizar" )
         }
     }
 
@@ -48,8 +51,7 @@ export function ProjectProviderInternal({children}){
             })
             logout()
         } catch(error){
-            const errorMessage = error.response.data.message || "Erro desconhecido";
-            toast.error("Erro ao deletar: " + errorMessage)
+            toast.error("Conta deletada")
         }
     }
 

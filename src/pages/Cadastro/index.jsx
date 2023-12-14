@@ -2,7 +2,7 @@ import { Button, Input, HeaderLogoTitle } from "../../components/index.component
 import { useForm } from "react-hook-form"
 import { useContext } from "react"
 import { ClientContext } from "../../providers/ContextProject"
-import { Header, Main, MainContainer, TitleMain, StyleForm, StyleFormDiv,  StyleRadioContainer, StyleRadio, StyleRadioTitle, StyleRadioOptions  } from "./style"
+import { Header, Main, MainContainer, TitleMain, StyleForm, StyleFormDiv, StyleInputDiv, StyleRadioContainer, StyleRadio, StyleRadioTitle, StyleRadioOptions  } from "./style"
 import { HeaderHome } from "../../components/header/style"
 import { useNavigate } from "react-router-dom"
 import { StyleTitle2, StyleTextErro } from "../../styles/typography"
@@ -50,7 +50,7 @@ export function RegisterPage(){
                     </TitleMain>
                     <StyleForm onSubmit = { handleSubmit(submit) }>
                         <StyleFormDiv>
-                            <div>
+                            <StyleInputDiv>
                                 <Input
                                     type="text"
                                     placeholder="Nome completo"
@@ -58,51 +58,51 @@ export function RegisterPage(){
                                     
                                 />
                                 {errors.full_name ? <StyleTextErro>{errors.full_name.message}</StyleTextErro> : null }
-                            </div>
-                            <div>
+                            </StyleInputDiv>
+                            <StyleInputDiv>
                                 <Input
                                     type="text"
                                     placeholder="Nome de usuário"
                                     {...register("username")}
                                 />
                                 {errors.username ? <StyleTextErro>{errors.username.message}</StyleTextErro> : null }
-                            </div>
+                            </StyleInputDiv>
                         </StyleFormDiv>
                         <StyleFormDiv>
-                            <div>
+                            <StyleInputDiv>
                                 <Input
                                     type="email"
-                                    placeholder="email"
+                                    placeholder="Email"
                                     {...register("email")}
                                 />
                                 {errors.email ? <StyleTextErro>{errors.email.message}</StyleTextErro> : null }
-                            </div>
-                            <div>
+                            </StyleInputDiv>
+                            <StyleInputDiv>
                                 <Input
                                     type="text"
                                     placeholder="Número de telefone"
                                     {...register("phone_number")}
                                 />
                                 {errors.phone_number ? <StyleTextErro>{errors.phone_number.message}</StyleTextErro> : null }
-                            </div>      
+                            </StyleInputDiv>      
                         </StyleFormDiv>
                         <StyleFormDiv >
-                            <div>
+                            <StyleInputDiv>
                                 <Input
                                     type="password"
                                     placeholder="Senha"
                                     {...register("password")}
                                 />
                                 {errors.password ? <StyleTextErro>{errors.password.message}</StyleTextErro> : null }
-                            </div>
-                            <div>
+                            </StyleInputDiv>
+                            <StyleInputDiv>
                                 <Input
                                     type="password"
                                     placeholder="Digite a senha novamente"
                                     {...register("confirm")}
                                 />
                                 {errors.confirm ? <StyleTextErro>{errors.confirm.message}</StyleTextErro> : null }
-                            </div>
+                            </StyleInputDiv>
                         </StyleFormDiv>
                         <StyleRadioContainer>
                             <StyleRadio>

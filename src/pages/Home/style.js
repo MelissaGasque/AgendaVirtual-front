@@ -18,7 +18,12 @@ export const Form = styled.form`
     align-items: center;
     justify-content: center;
     gap:0.8rem;
-`   
+`
+
+export const InputDiv = styled.div`
+    width: 20rem;
+`
+
 export const Main = styled.main`
     display: flex;
     width: 100vw;

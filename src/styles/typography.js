@@ -3,7 +3,10 @@ import styled from "styled-components"
 export const StyleTitle = styled.h1`
 	font-weight: 700;
     font-size: 3.5rem;
-    font-style: normal; 
+    font-style: normal;
+    @media(max-width: 600px){
+        font-size: 2.5rem;
+    } 
 `
 export const StyleTitle2 = styled.h2`
 	font-weight: 500;
